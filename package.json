@@ -1,0 +1,22 @@
+{
+  "name": "status_checker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "build": "cd client && webpack -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.1",
+    "mongodb": "^2.2.31",
+    "webpack": "^3.6.0"
+  },
+  "devDependencies": {
+    "mocha": "^4.0.0",
+    "webpack": "^3.6.0"
+  }
+}
