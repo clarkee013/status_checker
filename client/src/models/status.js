@@ -3,9 +3,9 @@ var Status = function(options){
     this.name = name;
     this.colour = colour;
     this.resolved = resolved;
-    this.startDate = options.activeDate;
+    this.startDate = options.startDate;
     this.lastUpdated = options.lastUpdated;
-    this.endDate = options.resolveDate;
+    this.endDate = options.endDate;
     this.event = options.event || [];
 
 
