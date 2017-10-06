@@ -22,3 +22,6 @@ db.status.insert([
 ])
 
 
+// Seeds needs split into different collections to seed the correct collections 
+// as the above structure has changed to maintain Single Responsibility
+
