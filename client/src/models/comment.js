@@ -1,8 +1,9 @@
 var Comment = function(options){
-        this.id = options.id;
+        this.id = options._id;
         this.eventId = options.eventId;
-        this.text = options.text;
-       
+        this.commentDate = options.commentDate;
+        this.commentText = options.commentText;
+        
     }
     
     module.exports = Comment; 

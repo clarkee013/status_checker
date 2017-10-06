@@ -6,7 +6,7 @@ var EventQuery = function () {
 
 EventQuery.prototype = {
 
-    all: function (callback) {
+    allEvents: function (callback) {
         MongoClient.connect(this.url, function (err, db) {
             var collection = db.collection('events');
             collection.find().toArray(function (err, result) {
@@ -15,7 +15,7 @@ EventQuery.prototype = {
         });
     },
 
-    add: function (commentToAdd, onQueryFinished) {
+    addEvent: function (commentToAdd, onQueryFinished) {
         MongoClient.connect(this.url, function (err, db) {
             if (db) {
                 var collection = db.collection('events');
@@ -30,16 +30,20 @@ EventQuery.prototype = {
     findEventByEventId: function (eventId, callback) {
         MongoClient.connect(this.url, function (err, db) {
             var collection = db.collection('events');
-            collection.findOne({"_id": new ObjectId(eventId)}).toArray(function (err, result) {
+            collection.findOne({
+                _id: new ObjectId(eventId)
+            }).toArray(function (err, result) {
                 callback(result);
             });
         });
     },
 
-    allEventsByStatusId: function(statusId, callback) {
-        MongoClient.connect(this.url, function(err, db){
+    allEventsByStatusId: function (statusId, callback) {
+        MongoClient.connect(this.url, function (err, db) {
             var collection = db.collection('events');
-            collection.find({}, {"statusId" : new Object(statusId)}).toArray(function(err, result){
+            collection.find({}, {
+                statusId: new Object(statusId)
+            }).toArray(function (err, result) {
                 callback(result);
             });
         });
@@ -48,14 +52,48 @@ EventQuery.prototype = {
     deleteEventByEventId: function (eventId, callback) {
         MongoClient.connect(this.url, function (err, db) {
             var collection = db.collection('events');
-            collection.deleteOne({"_id": new ObjectId(eventId)}, function (err, result) {
+            collection.deleteOne({
+                _id: new ObjectId(eventId)
+            }, function (err, result) {
                 callback(result);
             });
         });
     },
-    // dont think i need the callback for a delete - would it be a onQueryFinished like the all?
+    // not sure if callback function is needed yet, res 200 OK should be here or controller?
 
+    deleteEventsByStatusId: function (statusId, callback) {
+        MongoClient.connect(this.url, function (err, db) {
+            var collection = db.collection('events');
+            collection.deleteMany({
+                statusId: new ObjectId(statusId)
+            }, function (err, result) {
+                callback(result);
+            });
+        });
+    },
+    // not sure if callback function is needed yet, res 200 OK should be here or controller?
 
+    updateEventByEventId: function (eventId, StatusIdToEdit, startDateToEdit, lastUpdateDateToEdit, resolvedDateToEdit) {
+        MongoClient.connect(this.url, function (err, db) {
+            var collection = db.collection('events');
+            collection.upateOne({
+                    eventId: new Object(eventId)
+                }, {
+                    $set: {
+                        "statusId": StatusIdToEdit,
+                        "startDate": startDateToEdit,
+                        "lastUpdated": lastUpdateDateToEdit,
+                        "resolvedDate": resolvedDateToEdit
+                    }
+                },
+                function (err, result) {
+                    callback(result);
+                });
+        });
+    },
+    // not sure if callback function is needed here either - 
+    // onQueryFinished? Another res 200 OK message/controller?
+    // edit comments[] from here as well?
 
 
 };
