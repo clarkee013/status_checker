@@ -73,14 +73,14 @@ EventQuery.prototype = {
     },
     // not sure if callback function is needed yet, res 200 OK should be here or controller?
 
-    updateEventByEventId: function (eventId, StatusIdToEdit, startDateToEdit, lastUpdateDateToEdit, resolvedDateToEdit) {
+    updateEventByEventId: function (eventId, StatusNameToEdit, startDateToEdit, lastUpdateDateToEdit, resolvedDateToEdit, callback) {
         MongoClient.connect(this.url, function (err, db) {
             var collection = db.collection('events');
             collection.upateOne({
                     eventId: new Object(eventId)
                 }, {
                     $set: {
-                        "statusId": StatusIdToEdit,
+                        "statusId": StatusNameToEdit,
                         "startDate": startDateToEdit,
                         "lastUpdated": lastUpdateDateToEdit,
                         "resolvedDate": resolvedDateToEdit

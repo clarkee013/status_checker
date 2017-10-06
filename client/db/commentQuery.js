@@ -80,7 +80,7 @@ CommentQuery.prototype = {
                     _Id: new Object(eventId)
                 }, {
                     $set: {
-                        "eventId": eventIdToEdit,
+                        "eventId": eventNameToEdit,
                         "commentDateToEdit": commentDateToEdit,
                         "commentText": textToEdit
                     }
