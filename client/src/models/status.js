@@ -5,7 +5,7 @@ var Status = function(options){
     this.resolved = resolved;
     this.startDate = options.startDate;
     this.lastUpdated = options.lastUpdated;
-    this.endDate = options.endDate;
+    this.resolveDate = options.resolveDate;
     this.event = options.event || [];
 
 

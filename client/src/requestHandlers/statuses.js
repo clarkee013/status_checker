@@ -1,4 +1,4 @@
-var Status = require('/status');
+var Status = require('/models/status');
 
 var Statuses = function(){
 
@@ -17,6 +17,12 @@ Statuses.prototype.makePostRequest = function(url, callback, payload){
     request.setRequestHeader('Content-type', 'application/json');
     request.addEventListener('load', callback);
     request.send(payload);
+};
+
+Statuses.prototype.add = function(newStatus, callback){
+    var commentToAdd = JSON.stringify(newStatus);
+    console.log("New Status", statusToAdd);
+    this.makePostRequest("http://localhost:3000/api/statuses", callback, statusToAdd);
 };
 
 
