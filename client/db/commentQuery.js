@@ -73,7 +73,7 @@ CommentQuery.prototype = {
     },
     // not sure if callback function is needed yet, res 200 OK should be here or controller?
 
-    updateCommentByCommentId: function (commentId, eventIdToEdit, commentDateToEdit, textToEdit) {
+    updateCommentByCommentId: function (commentId, eventIdToEdit, commentDateToEdit, textToEdit, callback) {
         MongoClient.connect(this.url, function (err, db) {
             var collection = db.collection('comments');
             collection.upateOne({

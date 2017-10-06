@@ -1,49 +1,95 @@
 use comments;
 
-db.comments.insert([
-    {
+db.comments.insert([{
         eventId: 1,
         commentDate: "01/10/2017",
-        commentText: "Test text for 1st comment - event 001"
+        commentText: "Test text for 1st comment - event 1"
     },
     {
-        eventId: 001,
+        eventId: 1,
         commentDate: "02/10/2017",
-        commentText: "Test text for 2nd comment - event 001"
+        commentText: "Test text for 2nd comment - event 1"
     },
     {
-        eventId: 002,
+        eventId: 2,
         commentDate: "03/10/2017",
-        commentText: "Test text for 1st comment - event 002"
+        commentText: "Test text for 1st comment - event 2"
     },
     {
-        eventId: 003,
+        eventId: 3,
         commentDate: "04/10/2017",
-        commentText: "Test text for 1st comment - event 003"
+        commentText: "Test text for 1st comment - event 3"
+    },
+    {
+        eventId: 4,
+        commentDate: "05/10/2017",
+        commentText: "Test text for 1st comment - event 4"
     },
 
 ])
 
 use events;
 
-db.events.insert({
+db.events.insert([{
+        statusId: 1,
+        startDate: "01/10/2017",
+        lastUpdated: "02/10/2017",
+        resolvedDate: "02/10/2017"
+    },
     {
-        statusId: 1
-    }
-})
+        statusId: 2,
+        startDate: "03/10/2017",
+        lastUpdated: "03/10/2017",
+        resolvedDate: "04/10/2017"
+    },
+    {
+        statusId: 3,
+        startDate: "01/10/2017",
+        lastUpdated: "02/10/2017",
+        resolvedDate: "02/10/2017"
+    },
+    {
+        statusId: 4,
+        startDate: "05/10/2017",
+        lastUpdated: "05/10/2017",
+        resolvedDate: "02/11/2017"
+    },
 
+])
 
+use statuses;
 
-var Event = function(options){
-    this.id = options._id;
-    this.statusId = options.statusId;
-    this.startDate = options.startDate;
-    this.lastUpdated = options.lastUpdated;
-    this.resolvedDate = options.resolvedDate;
-    this.comment = options.comment || [];
-    
-}
+db.statuses.insert([{
+        name: "Critical",
+        colour: "Red",
+        resolved: false,
+        startDate: "01/10/2017",
+        lastUpdated: "02/10/2017",
+        resolvedDate: "02/10/2017",
+    },
+    {
+        name: "Major",
+        colour: "Amber",
+        resolved: true,
+        startDate: "03/10/2017",
+        lastUpdated: "03/10/2017",
+        resolvedDate: "04/10/2017",
+    },
+    {
+        name: "Minor",
+        colour: "Blue",
+        resolved: false,
+        startDate: "01/10/2017",
+        lastUpdated: "02/10/2017",
+        resolvedDate: "02/10/2017",
+    },
+    {
+        name: "Cosmetic",
+        colour: "Green",
+        resolved: false,
+        startDate: "01/11/2017",
+        lastUpdated: "05/10/2017",
+        resolvedDate: "02/11/2017",
+    },
 
-// Seeds needs split into different collections to seed the correct collections 
-// as the above structure has changed to maintain Single Responsibility
-
+])
