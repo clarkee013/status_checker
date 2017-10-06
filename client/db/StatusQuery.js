@@ -34,6 +34,13 @@ StatusQuery.prototype = {
               });
        });
      },     
+
+     allEvents: function(callback){
+         MongoClient.connect(this.url, function(err, db){
+             var collection = db.collection('status');
+             collection.find({}, {})
+         })
+     }
      
      
    };
