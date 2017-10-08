@@ -13,14 +13,14 @@ Statuses.prototype.makeRequest = function(url, callback){
 
 Statuses.prototype.makePostRequest = function(url, callback, payload){
     var request = new XMLHttpRequest();
-    request.open('POST', url);
-    request.setRequestHeader('Content-type', 'application/json');
-    request.addEventListener('load', callback);
+    request.open("POST", url);
+    request.setRequestHeader("Content-type", "application/json");
+    request.onload = callback;
     request.send(payload);
 };
 
 Statuses.prototype.add = function(newStatus, callback){
-    var commentToAdd = JSON.stringify(newStatus);
+    var statusToAdd = JSON.stringify(newStatus);
     console.log("New Status", statusToAdd);
     this.makePostRequest("http://localhost:3000/api/statuses", callback, statusToAdd);
 };

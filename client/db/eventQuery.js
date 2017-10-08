@@ -6,7 +6,7 @@ var EventQuery = function () {
 
 EventQuery.prototype = {
 
-    allEvents: function (callback) {
+    all: function (callback) {
         MongoClient.connect(this.url, function (err, db) {
             var collection = db.collection('events');
             collection.find().toArray(function (err, result) {
@@ -15,7 +15,7 @@ EventQuery.prototype = {
         });
     },
 
-    addEvent: function (commentToAdd, onQueryFinished) {
+    add: function (commentToAdd, onQueryFinished) {
         MongoClient.connect(this.url, function (err, db) {
             if (db) {
                 var collection = db.collection('events');
@@ -71,7 +71,6 @@ EventQuery.prototype = {
             });
         });
     },
-    // not sure if callback function is needed yet, res 200 OK should be here or controller?
 
     updateEventByEventId: function (eventId, StatusNameToEdit, startDateToEdit, lastUpdateDateToEdit, resolvedDateToEdit, callback) {
         MongoClient.connect(this.url, function (err, db) {

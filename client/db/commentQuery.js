@@ -6,7 +6,7 @@ var CommentQuery = function () {
 
 CommentQuery.prototype = {
 
-    allComments: function (callback) {
+    all: function (callback) {
         MongoClient.connect(this.url, function (err, db) {
             var collection = db.collection('comments');
             collection.find().toArray(function (err, result) {
@@ -15,7 +15,7 @@ CommentQuery.prototype = {
         });
     },
 
-    addComment: function (commentToAdd, onQueryFinished) {
+    add: function (commentToAdd, onQueryFinished) {
         MongoClient.connect(this.url, function (err, db) {
             if (db) {
                 var collection = db.collection('comments');
@@ -38,11 +38,11 @@ CommentQuery.prototype = {
         });
     },
 
-    allCommentsByEventId: function (eventId, callback) {
+    allCommentsByEventId: function (EventId, callback) {
         MongoClient.connect(this.url, function (err, db) {
             var collection = db.collection('comments');
             collection.find({}, {
-                eventId: new Object(eventId)
+                eventId: new Object(EventId)
             }).toArray(function (err, result) {
                 callback(result);
             });
@@ -59,7 +59,6 @@ CommentQuery.prototype = {
             });
         });
     },
-    // not sure if callback function is needed yet, res 200 OK should be here or controller?
 
     deleteCommentsByEventId: function (eventId, callback) {
         MongoClient.connect(this.url, function (err, db) {
@@ -71,7 +70,6 @@ CommentQuery.prototype = {
             });
         });
     },
-    // not sure if callback function is needed yet, res 200 OK should be here or controller?
 
     updateCommentByCommentId: function (commentId, eventIdToEdit, commentDateToEdit, textToEdit, callback) {
         MongoClient.connect(this.url, function (err, db) {
@@ -90,8 +88,7 @@ CommentQuery.prototype = {
                 });
         });
     },
-    // not sure if callback function is needed here either - 
-    // onQueryFinished? Another res 200 OK message/controller?
+
 
 
 

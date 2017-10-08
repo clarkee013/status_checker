@@ -1,0 +1,119 @@
+<html><head>
+    <title>
+    Status Checker
+    
+    </title>
+    </head>
+    <body>
+    <div id="header">
+    <div class="inner">
+    <ul>
+        
+    <li><a href="/" id="home-button">Home</a></li>
+    <li><a href="/newStatus" id="new-status-button">New Status</a></li>
+    <li><a href="/resolvedEvents" id="resolved-events-button">Resolved Events</a></li>
+    <li><a href="http://www.iomart.com">Website</a></li>
+    <li><a href="http://www.twitter.com/iomart">Twitter</a></li>
+
+    </ul>
+    </div>
+    </div>
+    <div id="content">
+    <div class="inner">
+    <h1>Status Checker</h1>
+    <p class="meta">
+    Any information regarding active issues or planned maintenance will be made available here.
+    </p>
+    <div id="home-div">
+     
+    <div id="resolved-events-div">
+    <h3 class="future">
+    Resolved Events
+    </h3>
+    <ul class="events resolved">
+    <li class="event" style="">
+    <h4 style="">
+    <a href="" style=""></a>
+    </h4>
+    <p class="date">
+    
+    </p>
+    </li>
+    <li class="event" style="">
+    <h4 style="">
+    <a href="" style=""></a>
+    </h4>
+    <p class="date">
+ 
+    </p>
+    </li>
+    <li class="event" style="">
+    <h4 style="">
+    <a href="" style=""></a>
+    </h4>
+    <p class="date">
+ 
+    </p>
+    </li>
+    <li class="event" style="">
+    <h4 style="">
+    <a href="" style=""></a>
+    </h4>
+    <p class="date">
+
+    </p>
+    </li>
+    <li class="event" style="">
+    <h4 style="">
+    <a href="" style=""></a>
+    </h4>
+    <p class="date">
+
+    </p>
+    </li>
+    
+    </ul>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <div id="newStatus-div">
+        
+              <div id="newStatusForm-flex-wrapper">
+                <h2 class="status-header"> New Status </h2>
+                <form id="status-form" action="/api/statuses" method="post">
+                  <label for="name">Name:</label>
+                  <input type="text" id="name" name="name" placeholder="Status Description"/>
+        
+                  <label for="colour">Colour:</label>
+                  <select name="colour">Colour:
+                    <option value="red">Red</option>
+                    <option value="amber">Amber</option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                  </select>
+        
+                  <label for="resolved">Resolved:</label>
+                  <select name="resolved">Resolved:
+                    <option value="true">Resolved</option>
+                    <option value="false">In Progress</option>
+                  </select>
+
+                  <label for="startDate">Start Date:</label>
+                  <input type="text" id="startDate" name="startDate" placeholder="DD/MM/YYYY"/>
+        
+                  <label for="lastUpdated">Last Updated:</label>
+                  <input type="text" id="lastUpdated" name="lastUpdated" placeholder="DD/MM/YYYY"/>
+        
+                  <label for="resolvedDate">Resolved Date:</label>
+                  <input type="text" id="resolvedDate" name="resolvedDate" placeholder="DD/MM/YYYY"/>
+
+                  <button class="submit-button" type="submit" value="Submit"/>
+                </form>
+                <text-area rows="5" cols="50" form="status-form">Create New Status</text-area> 
+              </div>
+              </div>
+    
+    
+    </body></html>

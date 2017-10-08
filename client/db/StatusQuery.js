@@ -5,7 +5,7 @@ var StatusQuery = function () {
 };
 
 StatusQuery.prototype = {
-    allStatuses: function (callback) {
+    all: function (callback) {
         MongoClient.connect(this.url, function (err, db) {
             var collection = db.collection('statuses');
             collection.find().toArray(function (err, result) {
@@ -14,7 +14,7 @@ StatusQuery.prototype = {
         });
     },
 
-    addStatus: function (statusToAdd, onQueryFinished) {
+    add: function (statusToAdd, onQueryFinished) {
         MongoClient.connect(this.url, function (err, db) {
             if (db) {
                 var collection = db.collection('statuses');
@@ -37,7 +37,7 @@ StatusQuery.prototype = {
         });
     },
 
-
+// further CRUD actions needed...
 
 
 
