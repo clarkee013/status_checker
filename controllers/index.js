@@ -23,10 +23,6 @@ router.get('/', function (req, res) {
   res.sendFile(path.join(__dirname + '/../client/build/html/index.html'));
 });
 
-router.get('/newStatus', function (req, res) {
-  res.sendFile(path.join(__dirname + '/../client/build/html/newStatus.html'));
-});
-
 // placeholder for more routers - file path my need revised //
 // router.get('/EXAMPLE', function (req, res) {
 //   res.sendFile(path.join(__dirname + '/../client/build/html/EXAMPLE.html'));

@@ -5,6 +5,21 @@ var StatusQuery = function () {
 };
 
 StatusQuery.prototype = {
+
+    // Create One & return all 
+    add: function (statusToAdd, callback) {
+        MongoClient.connect(this.url, function (err, db) {
+            if (db) {
+                var collection = db.collection('statuses');
+                collection.insert(statusToAdd);
+                collection.find().toArray(function (err, results) {
+                    callback(results);
+                });
+            };
+        });
+    },
+
+    // Read all & return all
     all: function (callback) {
         MongoClient.connect(this.url, function (err, db) {
             var collection = db.collection('statuses');
@@ -14,19 +29,8 @@ StatusQuery.prototype = {
         });
     },
 
-    add: function (statusToAdd, onQueryFinished) {
-        MongoClient.connect(this.url, function (err, db) {
-            if (db) {
-                var collection = db.collection('statuses');
-                collection.insert(statusToAdd);
-                collection.find().toArray(function (err, docs) {
-                    onQueryFinished(docs);
-                });
-            };
-        });
-    },
-
-    findStatusById: function (id, callback) {
+    // Read by Id and return result
+    findById: function (id, callback) {
         MongoClient.connect(this.url, function (err, db) {
             var collection = db.collection('statuses');
             collection.findOne({
@@ -37,12 +41,35 @@ StatusQuery.prototype = {
         });
     },
 
-// further CRUD actions needed...
+    // Read all with resolved as False & return all results
+    findUnresolved: function (callback) {
+        MongoClient.connect(this.url, function (err, db) {
+            var collection = db.collection('statuses');
+            collection.find({
+                "resolved": false
+            }).toArray(function (err, results) {
+                callback(results);
+            });
+        });
+    },
+
+    // Delete Status by ID & return amended status results
+    delete: function (id, callback) {
+        MongoClient.connect(this.url, function (err, db) {
+            var collection = db.collection('statuses');
+            collection.deleteOne({
+                "_id": new Object(id)
+            });
+            collection.find().toArray(function (err, results) {
+                callback(results);
+            });
+        });
+    },
 
 
 
 
-};
+}; // end of prototype
 
 
 module.exports = StatusQuery

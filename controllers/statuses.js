@@ -22,7 +22,7 @@ statusRouter.post('/', function(req, res){
     statusQuery.add(status, function(){
         res.redirect('/')
     })
-    // console.log(newComment);
+    // console.log(newStatus);
 });
 
 

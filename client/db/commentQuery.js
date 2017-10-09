@@ -6,88 +6,98 @@ var CommentQuery = function () {
 
 CommentQuery.prototype = {
 
-    all: function (callback) {
-        MongoClient.connect(this.url, function (err, db) {
-            var collection = db.collection('comments');
-            collection.find().toArray(function (err, result) {
-                callback(result);
+        // Create One & return all 
+        add: function (commentToAdd, callback) {
+            MongoClient.connect(this.url, function (err, db) {
+                if (db) {
+                    var collection = db.collection('comments');
+                    collection.insert(eventToAdd);
+                    collection.find().toArray(function (err, results) {
+                        callback(results);
+                    });
+                };
             });
-        });
-    },
-
-    add: function (commentToAdd, onQueryFinished) {
-        MongoClient.connect(this.url, function (err, db) {
-            if (db) {
+        },
+    
+        // Read all & return all
+        all: function (callback) {
+            MongoClient.connect(this.url, function (err, db) {
                 var collection = db.collection('comments');
-                collection.insert(commentToAdd);
-                collection.find().toArray(function (err, docs) {
-                    onQueryFinished(docs);
+                collection.find().toArray(function (err, result) {
+                    callback(result);
                 });
-            };
-        });
-    },
-
-    findCommentByCommentId: function (id, callback) {
-        MongoClient.connect(this.url, function (err, db) {
-            var collection = db.collection('comments');
-            collection.findOne({
-                _id: new ObjectId(id)
-            }).toArray(function (err, result) {
-                callback(result);
             });
-        });
-    },
-
-    allCommentsByEventId: function (EventId, callback) {
-        MongoClient.connect(this.url, function (err, db) {
-            var collection = db.collection('comments');
-            collection.find({}, {
-                eventId: new Object(EventId)
-            }).toArray(function (err, result) {
-                callback(result);
+        },
+    
+        // Read by Id and return result
+        findById: function (id, callback) {
+            MongoClient.connect(this.url, function (err, db) {
+                var collection = db.collection('comments');
+                collection.findOne({
+                    "_id": new ObjectId(id)
+                }, function (err, result) {
+                    callback(result);
+                });
             });
-        });
-    },
+        },
+    
+        // Read by Event ID and return results
+        allByEventID: function (eventId, callback) {
+            MongoClient.connect(this.url, function (err, db) {
+                var collection = db.collection('comments');
+                collection.find({}, {
+                    "eventId": new Object(eventId)
+                }).toArray(function (err, result) {
+                    callback(result);
+                });
+            });
+        },
 
-    deleteCommentByCommentId: function (commentId, callback) {
+    // Update Event by Comment ID - work needed on this method (placeholder)
+    // updateCommentByCommentId: function (commentId, eventIdToEdit, commentDateToEdit, textToEdit, callback) {
+    //     MongoClient.connect(this.url, function (err, db) {
+    //         var collection = db.collection('comments');
+    //         collection.upateOne({
+    //                 _Id: new Object(eventId)
+    //             }, {
+    //                 $set: {
+    //                     "eventId": eventNameToEdit,
+    //                     "commentDateToEdit": commentDateToEdit,
+    //                     "commentText": textToEdit
+    //                 }
+    //             },
+    //             function (err, result) {
+    //                 callback(result);
+    //             });
+    //     });
+    // },
+
+     // Delete Event by ID & return amended results
+     delete: function (id, callback) {
         MongoClient.connect(this.url, function (err, db) {
             var collection = db.collection('comments');
             collection.deleteOne({
-                _id: new ObjectId(commentId)
-            }, function (err, result) {
-                callback(result);
+                "_id": new Object(id)
+            });
+            collection.find().toArray(function (err, results) {
+                callback(results);
             });
         });
     },
 
-    deleteCommentsByEventId: function (eventId, callback) {
+    // Delete all Comments by Event ID & return amended Comments results
+    deleteAllByEventId: function (eventId, callback) {
         MongoClient.connect(this.url, function (err, db) {
             var collection = db.collection('comments');
             collection.deleteMany({
-                eventId: new ObjectId(eventId)
-            }, function (err, result) {
-                callback(result);
+                "eventId": new ObjectId(eventId)
+            });
+            collection.find().toArray(function (err, results) {
+                callback(results);
             });
         });
     },
 
-    updateCommentByCommentId: function (commentId, eventIdToEdit, commentDateToEdit, textToEdit, callback) {
-        MongoClient.connect(this.url, function (err, db) {
-            var collection = db.collection('comments');
-            collection.upateOne({
-                    _Id: new Object(eventId)
-                }, {
-                    $set: {
-                        "eventId": eventNameToEdit,
-                        "commentDateToEdit": commentDateToEdit,
-                        "commentText": textToEdit
-                    }
-                },
-                function (err, result) {
-                    callback(result);
-                });
-        });
-    },
 
 
 
@@ -97,8 +107,7 @@ CommentQuery.prototype = {
 
 
 
-
-};
+}; // end of prototype
 
 
 module.exports = CommentQuery;

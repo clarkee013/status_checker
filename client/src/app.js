@@ -2,20 +2,31 @@ var Status = require('./models/status');
 var Event = require('./models/event');
 var Comment = require('.models/comment');
 
+//TODO
+// - populate unresolved status, create lists, append items 
+// - populate resolved events with details, create lists & append items
+// - edit statuses, events & comments 'page/s'
 
 
-// Set up handlers for nav menu options
-setNavHandlers();
 
-// Set up handler for creating a status
+
 var statusForm = document.querySelector("#status-form");
 statusForm.onsubmit = createNewStatus;
 
 var setNavHandlers = function () {
-    var newStatusButton = document.querySelector("#new-status-button");
-    newStatusButton.onclick = switchToContact;
     var homeButton = document.querySelector("#home-button");
     homeButton.onclick = switchToHome;
+    var newStatusButton = document.querySelector("#new-status-button");
+    newStatusButton.onclick = switchToNewStatus;
+    var resolvedEventsButton = document.querySelector("#resolved-events-button");
+    resolvedEventsButton.onclick = switchToResolvedEvents;
+}
+
+var switchToHome = function () {
+    var main = document.querySelector("#main-div")
+    main.style.display = "block";
+    var newStatus = document.querySelector("#newStatus-div")
+    newStatus.style.display = "none";
 }
 
 var switchToNewStatus = function () {
@@ -25,12 +36,6 @@ var switchToNewStatus = function () {
     main.style.display = "none";
 }
 
-var switchToHome = function () {
-    var main = document.querySelector("#main-div")
-    main.style.display = "block";
-    var newStatus = document.querySelector("#newStatus-div")
-    newStatus.style.display = "none";
-}
 
 var switchToResolvedEvents = function () {
     var main = document.querySelector("#main-div")
